@@ -4,14 +4,14 @@ metadata:
   name: budget-app
   namespace: argocd
 spec:
-  destination:
-    namespace: default
-    server: https://kubernetes.default.svc
   project: default
   source:
-    repoURL: https://github.com/chandrikatck/budget-app-gitops.git
+    repoURL: https://github.com/Chandrikatck/budget-app-gitops.git
     targetRevision: HEAD
     path: .
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
   syncPolicy:
     automated:
       prune: true
