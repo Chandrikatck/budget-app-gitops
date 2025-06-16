@@ -21,6 +21,13 @@ spec:
         - name: DATABASE_HOST
           value: postgres
         - name: DATABASE_USER
-          value: postgres
+          valueFrom:
+            secretKeyRef:
+              name: db-secret
+              key: POSTGRES_USER
         - name: DATABASE_PASSWORD
-          value: password
+          valueFrom:
+            secretKeyRef:
+              name: db-secret
+              key: DATABASE_PASSWORD
+
