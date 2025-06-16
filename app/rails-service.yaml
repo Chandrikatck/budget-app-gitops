@@ -4,10 +4,8 @@ metadata:
   name: rails-service
 spec:
   selector:
-    app: rails-app
+    app: rails
   ports:
-    - protocol: TCP
-      port: 3000
+    - port: 80
       targetPort: 3000
-      nodePort: 30080   # optional fixed port
-  type: NodePort
+  type: ClusterIP

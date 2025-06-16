@@ -6,28 +6,24 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: rails-app
+      app: rails
   template:
     metadata:
       labels:
-        app: rails-app
+        app: rails
     spec:
       containers:
       - name: rails
-        image: chandrikatck/budget-app
-        ports:
-        - containerPort: 3000
+        image: chandrikatck/budget-app:latest
         env:
         - name: DATABASE_HOST
           value: postgres
-        - name: DATABASE_USER
-          valueFrom:
-            secretKeyRef:
-              name: db-secret
-              key: POSTGRES_USER
+        - name: DATABASE_USERNAME
+          value: postgres
         - name: DATABASE_PASSWORD
           valueFrom:
             secretKeyRef:
               name: db-secret
-              key: DATABASE_PASSWORD
-
+              key: password
+        ports:
+        - containerPort: 3000
