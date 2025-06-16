@@ -1,0 +1,11 @@
+apiVersion: tekton.dev/v1
+kind: PipelineRun
+metadata:
+  name: rails-pipeline-run
+spec:
+  pipelineRef:
+    name: rails-ci-pipeline
+  workspaces:
+    - name: source
+      persistentVolumeClaim:
+        claimName: source-pvc

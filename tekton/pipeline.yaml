@@ -1,0 +1,22 @@
+apiVersion: tekton.dev/v1
+kind: Pipeline
+metadata:
+  name: rails-ci-pipeline
+spec:
+  workspaces:
+    - name: source
+  tasks:
+    - name: build
+      taskRef:
+        name: build-image
+      workspaces:
+        - name: source
+          workspace: source
+    - name: push
+      runAfter:
+        - build
+      taskRef:
+        name: push-image
+      workspaces:
+        - name: source
+          workspace: source

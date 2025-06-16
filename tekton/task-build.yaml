@@ -1,0 +1,15 @@
+apiVersion: tekton.dev/v1
+kind: Task
+metadata:
+  name: build-image
+spec:
+  workspaces:
+    - name: source
+  steps:
+    - name: build
+      image: docker:24.0.5
+      command:
+        - sh
+        - -c
+        - |
+          docker build -t chandrikatck/budget-app:latest $(workspaces.source.path)

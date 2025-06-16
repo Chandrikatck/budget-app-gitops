@@ -1,0 +1,27 @@
+apiVersion: tekton.dev/v1
+kind: Task
+metadata:
+  name: push-image
+spec:
+  workspaces:
+    - name: source
+  steps:
+    - name: push
+      image: docker:24.0.5
+      env:
+        - name: DOCKER_USER
+          valueFrom:
+            secretKeyRef:
+              name: docker-secret
+              key: username
+        - name: DOCKER_PASS
+          valueFrom:
+            secretKeyRef:
+              name: docker-secret
+              key: password
+      command:
+        - sh
+        - -c
+        - |
+          echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
+          docker push chandrikatck/budget-app:latest
