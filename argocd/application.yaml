@@ -2,13 +2,12 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: budget-app
-  namespace: argocd
 spec:
   project: default
   source:
     repoURL: https://github.com/Chandrikatck/budget-app-gitops.git
     targetRevision: HEAD
-    path: .
+    path: app  #Pointing directly to the directory with your manifests
   destination:
     server: https://kubernetes.default.svc
     namespace: default
